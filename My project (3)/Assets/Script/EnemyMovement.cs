@@ -4,7 +4,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform target;
     public float speed;
-
+    public int damage = 10;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,4 +21,16 @@ public class EnemyMovement : MonoBehaviour
 
         transform.rotation = Quaternion.LookRotation(direction);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("MainTower"))
+        {
+            collision.gameeObject.GetComponent<MainTower>().GetDamage(damage);
+            Destroy(gameObject);
+        }
+    }
+
+
+
+
 }
